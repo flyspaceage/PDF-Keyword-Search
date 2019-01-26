@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-/* https://github.com/AntonioErdeljac/file-upload-tutorial */
 export default class FileUpload extends Component {
 
   constructor(props) {
