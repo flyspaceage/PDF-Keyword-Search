@@ -1,7 +1,3 @@
-This project was bootstrapped with:
-[Create React App](https://github.com/facebook/create-react-app),
-[Express Generator](https://www.npmjs.com/package/express-generator).
-
 # Assignment
 Often times, we have tons of files of different types (e.g. .pdf, .doc, .docx, .ppt, .png, .html, ,jpg etc.) stored in an unstructured/haphazard manner on a laptop. Suppose, in our particular case, these files essentially contain text (scientific papers, research proposals, legal documents and what not).
 
@@ -26,6 +22,10 @@ Write an application using Node/Express and React/Redux for this purpose.
 - **Tim Smith** [tutorial](https://dev.to/iam_timsmith/lets-build-a-search-bar-in-react-120j)
 
 # Available Scripts
+
+This project was bootstrapped with:
+[Create React App](https://github.com/facebook/create-react-app),
+[Express Generator](https://www.npmjs.com/package/express-generator).
 
 Using node 8.10 run the following commands to test the project:
 
