@@ -10,6 +10,8 @@ This project was bootstrapped with:
 
 # Acknowledgments
 
+- **David Bashford** [textract](https://www.npmjs.com/package/textract)
+
 - **Antonio Erdeljac** [tutorial](https://medium.com/@_aerdeljac/file-upload-with-node-js-react-js-686e342ad7e7)
 
 - **Tim Smith** [tutorial](https://dev.to/iam_timsmith/lets-build-a-search-bar-in-react-120j)

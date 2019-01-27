@@ -34,7 +34,9 @@ export default class FileUpload extends Component {
       <form onSubmit={this.handleUpload}>
         <section className='container'>
           <h3 className='title'>Select Documents:</h3>
-          <input className='input' ref={(ref) => { this.uploadInput = ref; this.fileName = ref; }} type='file' multiple />
+          <input className='input'
+            ref={(ref) => { this.uploadInput = ref; this.fileName = ref; }}
+            type='file' multiple />
             <br /><br />
           <button className='button is-info'>Upload Document</button>
         </section>

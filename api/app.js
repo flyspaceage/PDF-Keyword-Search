@@ -11,7 +11,6 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));// TODO: -- ms --
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,16 +32,16 @@ app.post('/upload', (req, res, next) => {
   });
 });
 
-// send user keyword to getText
+// send user keyword
 app.post('/keyword', function(req, res){
+  //get keyword from input
   let kw = req.body.keyword;
-  console.log('KEYWORD : ', kw);
-  getText.doProgram(kw).then(function(filePath){
-    console.log(filePath);
+  // scan uploads directory for documents with the keyword
+  getText.searchDocumentForKeyword(kw).then(function(filePath){
+    // send filepath to render on front end
     res.json(filePath);
   });
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
