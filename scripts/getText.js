@@ -1,91 +1,81 @@
 const textract = require('textract');
 const fs = require('fs');
 
+//
+// const searchDocumentForKeyword = function searchDocumentForKeyword(filePath, keyword) {
+//
+//   return new Promise((resolve, reject) => {
+//
+//     // TODO: filePath.replace('C:\\fakepath\\','');
+//
+//     textract.fromFileWithPath(filePath, function( error, text ) {
+//       if(text !== '' && text != null){
+//         let words = text.split(' ');//split apart
+//         let keywordFrequency = 0;
+//         //search text for keywords...
+//         Object.keys(words).forEach(key => {
+//           let value = words[key];
+//           let lc = value.toLowerCase();
+//           //check object for keyword
+//           if(lc===keyword){
+//             keywordFrequency+=1;//increment frequency counter
+//           }
+//         });
+//         //reportCount(filePath, keywordFrequency);
+//         if(keywordFrequency > 1) {
+//           fileList.push(filePath);
+//           console.log(filePath);
+//         } else {
+//           console.log('Keyword: ' + keyword + ' not found in ' + filePath);
+//         }
+//       }else{
+//         console.log('ARE WE GETTING HERE');
+//         resolve(fileList);
+//       }
+//     });
+//   });
+// };
 
-function reportCount(filePath, keywordFrequency) {
-  console.log('Count is : ' + keywordFrequency + ' for ' + filePath);
-}
-
-let fileList = [];
-let countList = [];
-
-const searchDocumentForKeyword = function searchDocumentForKeyword(filePath, keyword) {
-  // TODO: filePath.replace('C:\\fakepath\\','');
-  textract.fromFileWithPath(filePath, function( error, text ) {
-    if(text !== '' && text != null){
-      let words = text.split(' ');//split apart
-      let keywordFrequency = 0;
-
-      //search text for keywords...
-      Object.keys(words).forEach(key => {
-        let value = words[key];
-        let lc = value.toLowerCase();
-        //check object for keyword
-        if(lc===keyword){
-          keywordFrequency+=1;//increment frequency counter
-        }
-      });
-
-      //reportCount(filePath, keywordFrequency);
-      if(keywordFrequency > 1) {
-        //pass the URL to ShowResults
-        console.log('Frequency ' + keywordFrequency + ' Filepath: ' + filePath );
-      }
-      else {
-        console.log('Keyword: ' + keyword + ' not found in ' + filePath);
-      }
-
-      //once the file is done processing, -1 files, and add results to filelist and countlist
-      running -= 1;
-      fileList.push(filePath);
-      countList.push(keywordFrequency);
-
-    }else{
-      console.log('Error:', error);
-      running -= 1;
-      return -1;
-    }
-  });
-};
 
 let running = -1;
 const doProgram = function(kw) {
-  // Wrapped in a promise
-  new Promise((resolve, reject) => {
+  //wrapped in a promise
+  return new Promise((resolve, reject) => {
+
+    let filesWithKeyword = [];
+
     //where the uploads go
     let directory = '../api/public/docs/';
+
     //read each file
     fs.readdir(directory, (err, files) => {
-      running = files.length;
+      running = files.length;//set running to amount of files left
       // console.log(files);
+      let pathsCounter = 0;
       files.forEach(file => {
         //search the document for
         let fp = directory + file;
-        searchDocumentForKeyword(fp, kw);
+        // console.log(fp);
+        textract.fromFileWithPath(fp, function( error, text ) {
+          pathsCounter++;
+          let words = text.split(' ');//split apart
+          //search text for keywords...
+          Object.keys(words).forEach(key => {
+            let value = words[key];
+            let lc = value.toLowerCase();
+            //check object for keyword
+            if(lc===kw){
+              filesWithKeyword.push(fp);
+            }
+          });
+          if (pathsCounter>=files.length){
+            console.log('Resolved filepath : ',fp);
+            resolve(filesWithKeyword);
+          }
+        });
       });
     });
   });
 };
 
-const getResults = function() {
-  if(running === 0) {
-    // return result of keyword search (lists?)
-    console.log('FileList: ', fileList);
-    console.log('CountList: ', countList);
-  }
-  else if(running === -1) {
-    // hasn't started or already finished
-  }
-  else {
-    //still processing, return False
-  }
-};
-
-// const keyword = function keyword(kw) {
-//   let k = kw;
-//   return k;
-// }
-
-// module.exports.keyword = keyword;
-module.exports.searchDocumentForKeyword = searchDocumentForKeyword;
 module.exports.doProgram = doProgram;

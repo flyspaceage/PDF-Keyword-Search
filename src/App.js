@@ -7,11 +7,30 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props);
+    this.handleNewItem = this.handleNewItem.bind(this);
     this.state = {
       selectedFile: null,
-      loaded: 0
+      loaded: 0,
+      urls:[]
     }
   }
+  handleNewItem(kw){
+    console.log(kw);
+    fetch('http://localhost:8000/keyword', {
+      method: 'POST',
+      body: JSON.stringify({keyword: kw}),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    }).then((response)=>{
+      return response.json()
+    }).then((newUrls)=>{
+      this.setState({
+        urls: newUrls
+      });
+    });
+  }
+
   render() {
     return (
       <div className='App'>
@@ -23,9 +42,9 @@ class App extends Component {
             <section className='section'>
               <FileUpload />
               <br />
-              <KeywordInput />
+              <KeywordInput onNewItem={this.handleNewItem}/>
               <br />
-              <ShowResults items={this.state.results} />
+              <ShowResults urls={this.state.urls} />
             </section>
           </div>
         </div>
