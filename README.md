@@ -22,7 +22,7 @@ Using node 8.10 run the following commands to test the project:
 
 In the root directory run:
 
-## `npm init`
+## `npm install`
 
 ## `npm start`
 
