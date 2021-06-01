@@ -1,4 +1,4 @@
-# Assignment
+# Abstract
 Often times, we have tons of files of different types (e.g. .pdf, .doc, .docx, .ppt, .png, .html, ,jpg etc.) stored in an unstructured/haphazard manner on a laptop. Suppose, in our particular case, these files essentially contain text (scientific papers, research proposals, legal documents and what not).
 
 We want to organize these files in a nice directory structure as per the keywords the user provides. So, we want one directory for files matching a particular keyword and a file should appear in all the directories corresponding to the keywords it matches. 
