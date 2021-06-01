@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:8000",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "express": "^4.16.4",
     "express-fileupload": "^1.1.1-alpha.1",
     "express-generator": "^4.16.0",
